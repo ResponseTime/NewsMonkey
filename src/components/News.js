@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 import Newsitem from "./Newsitem";
 import Spinner from "./Spinner";
+import PropTypes from "prop-types";
 
 export default class News extends Component {
+  static defaultProps = {
+    country: "us",
+    pageSize: 5,
+  };
+
+  static propTypes = {
+    country: PropTypes.string,
+    pageSize: PropTypes.number,
+  };
+
   constructor() {
     super();
     this.state = {
@@ -13,7 +24,7 @@ export default class News extends Component {
   }
   async componentDidMount() {
     this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=1&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let pdata = await data.json();
     this.setState({ articles: pdata.articles, totalSize: pdata.totalResults });
@@ -21,7 +32,11 @@ export default class News extends Component {
   }
   prev = async () => {
     this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${
+      this.props.category
+    }&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${
       this.state.page - 1
     }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
@@ -39,7 +54,11 @@ export default class News extends Component {
     ) {
     } else {
       this.setState({ loading: true });
-      let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${
+      let url = `https://newsapi.org/v2/top-headlines?country=${
+        this.props.country
+      }&category=${
+        this.props.category
+      }&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${
         this.state.page + 1
       }&pageSize=${this.props.pageSize}`;
       let data = await fetch(url);
