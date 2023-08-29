@@ -90,6 +90,9 @@ export default class News extends Component {
                           : "https://gumlet.assettype.com/bloombergquint%2F2022-09%2Fb3c38378-a076-47f0-9e55-0581c4230220%2F2017_07_11T000000Z_817957802_RC1ED66DFB00_RTRMADP_3_INDIA_NSE_TRADING.JPG?rect=0%2C170%2C4714%2C2475&w=1200&auto=format%2Ccompress&ogImage=true"
                       }
                       newsUrl={ele.url}
+                      date={new Date(ele.publishedAt).toGMTString()}
+                      author={ele.author ? ele.author : " Unknown "}
+                      source={ele.source.name}
                     />
                   </div>
                 );
