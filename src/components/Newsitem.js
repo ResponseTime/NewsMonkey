@@ -5,9 +5,9 @@ export default class Newsitem extends Component {
     let { title, desc, imgUrl, newsUrl } = this.props;
     return (
       <>
-        <div className="card">
+        <div className="card my-3">
           <span
-            class="position-absolute top-0 translate-middle badge rounded-pill bg-danger"
+            class="position-absolute top-0 translate-middle badge rounded-pill bg-danger "
             style={{ left: "90%", zIndex: 1 }}
           >
             {this.props.source}

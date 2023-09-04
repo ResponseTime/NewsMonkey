@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 export default class News extends Component {
   static defaultProps = {
     country: "us",
-    pageSize: 5,
+    pageSize: 6,
   };
 
   static propTypes = {
@@ -22,7 +22,7 @@ export default class News extends Component {
       page: 1,
     };
   }
-  async componentDidMount() {
+  async update() {
     this.setState({ loading: true });
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=1&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
@@ -30,45 +30,16 @@ export default class News extends Component {
     this.setState({ articles: pdata.articles, totalSize: pdata.totalResults });
     this.setState({ loading: false });
   }
+  async componentDidMount() {
+    this.update();
+  }
   prev = async () => {
-    this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=${
-      this.props.country
-    }&category=${
-      this.props.category
-    }&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${
-      this.state.page - 1
-    }&pageSize=${this.props.pageSize}`;
-    let data = await fetch(url);
-    let pdata = await data.json();
-    this.setState({
-      page: this.state.page - 1,
-      articles: pdata.articles,
-      loading: false,
-    });
+    this.setState({ page: this.state.page - 1 });
+    this.update();
   };
   next = async () => {
-    if (
-      this.state.page + 1 >
-      Math.ceil(this.state.totalSize / this.props.pageSize)
-    ) {
-    } else {
-      this.setState({ loading: true });
-      let url = `https://newsapi.org/v2/top-headlines?country=${
-        this.props.country
-      }&category=${
-        this.props.category
-      }&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${
-        this.state.page + 1
-      }&pageSize=${this.props.pageSize}`;
-      let data = await fetch(url);
-      let pdata = await data.json();
-      this.setState({
-        page: this.state.page + 1,
-        articles: pdata.articles,
-        loading: false,
-      });
-    }
+    this.setState({ page: this.state.page + 1 });
+    this.update();
   };
   render() {
     return (
