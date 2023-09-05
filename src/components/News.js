@@ -34,12 +34,36 @@ export default class News extends Component {
     this.update();
   }
   prev = async () => {
+    this.setState({ loading: true });
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${
+      this.props.category
+    }&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${
+      this.state.page - 1
+    }&pageSize=${this.props.pageSize}`;
+    let data = await fetch(url);
+    let pdata = await data.json();
+    this.setState({ articles: pdata.articles, totalSize: pdata.totalResults });
+    this.setState({ loading: false });
     this.setState({ page: this.state.page - 1 });
-    this.update();
+    // this.update();
   };
   next = async () => {
+    this.setState({ loading: true });
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${
+      this.props.category
+    }&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${
+      this.state.page + 1
+    }&pageSize=${this.props.pageSize}`;
+    let data = await fetch(url);
+    let pdata = await data.json();
+    this.setState({ articles: pdata.articles, totalSize: pdata.totalResults });
+    this.setState({ loading: false });
     this.setState({ page: this.state.page + 1 });
-    this.update();
+    // this.update();
   };
   render() {
     return (
