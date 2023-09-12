@@ -83,13 +83,13 @@ export default class News extends Component {
   render() {
     return (
       <>
-        <div className="container my-3">
+        <>
           <h1 class="text-center"> News Component</h1>
-          {this.state.loading && <Spinner />}
+          {/* {this.state.loading && <Spinner />} */}
           <InfiniteScroll
             dataLength={this.state.articles.length}
             next={this.fetchData}
-            hasMore={this.state.articles.length !== this.state.totalSize}
+            hasMore={!(this.state.articles.length > this.state.totalSize)}
             loader={<Spinner />}
             // endMessage={
             //   <p style={{ textAlign: "center" }}>
@@ -97,29 +97,31 @@ export default class News extends Component {
             //   </p>
             // }
           >
-            <div className="container row">
-              {this.state.articles.map((ele) => {
-                return (
-                  <div className="col-md-4">
-                    <Newsitem
-                      title={ele.title ? ele.title : " "}
-                      desc={ele.description ? ele.description : " "}
-                      imgUrl={
-                        ele.urlToImage
-                          ? ele.urlToImage
-                          : "https://gumlet.assettype.com/bloombergquint%2F2022-09%2Fb3c38378-a076-47f0-9e55-0581c4230220%2F2017_07_11T000000Z_817957802_RC1ED66DFB00_RTRMADP_3_INDIA_NSE_TRADING.JPG?rect=0%2C170%2C4714%2C2475&w=1200&auto=format%2Ccompress&ogImage=true"
-                      }
-                      newsUrl={ele.url}
-                      date={new Date(ele.publishedAt).toGMTString()}
-                      author={ele.author ? ele.author : " Unknown "}
-                      source={ele.source.name}
-                    />
-                  </div>
-                );
-              })}
+            <div className="container">
+              <div className="container row">
+                {this.state.articles.map((ele) => {
+                  return (
+                    <div className="col-md-4">
+                      <Newsitem
+                        title={ele.title ? ele.title : " "}
+                        desc={ele.description ? ele.description : " "}
+                        imgUrl={
+                          ele.urlToImage
+                            ? ele.urlToImage
+                            : "https://gumlet.assettype.com/bloombergquint%2F2022-09%2Fb3c38378-a076-47f0-9e55-0581c4230220%2F2017_07_11T000000Z_817957802_RC1ED66DFB00_RTRMADP_3_INDIA_NSE_TRADING.JPG?rect=0%2C170%2C4714%2C2475&w=1200&auto=format%2Ccompress&ogImage=true"
+                        }
+                        newsUrl={ele.url}
+                        date={new Date(ele.publishedAt).toGMTString()}
+                        author={ele.author ? ele.author : " Unknown "}
+                        source={ele.source.name}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </InfiniteScroll>
-        </div>
+        </>
         {/* <div className="container d-flex justify-content-between">
           <button
             type="button"
