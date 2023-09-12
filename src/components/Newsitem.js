@@ -6,13 +6,18 @@ export default class Newsitem extends Component {
     return (
       <>
         <div className="card">
-          <span
-            class="position-absolute top-0 translate-middle badge rounded-pill bg-danger "
-            style={{ left: "90%", zIndex: 1 }}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              position: "absolute",
+              right: "0",
+            }}
           >
-            {this.props.source}
-            <span class="visually-hidden">unread messages</span>
-          </span>
+            <span className="badge rounded-pill bg-danger ">
+              {this.props.source}
+            </span>
+          </div>
           <img className="card-img-top" src={imgUrl} alt="Card image cap" />
           <div className="card-body">
             <h5 className="card-title">

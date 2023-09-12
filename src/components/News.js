@@ -35,15 +35,19 @@ export default class News extends Component {
     });
   };
   async update() {
+    this.props.set(10);
     this.setState({ loading: true });
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=1&pageSize=${this.props.pageSize}`;
+    this.props.set(30);
     let data = await fetch(url);
     let pdata = await data.json();
+    this.props.set(70);
     this.setState({
       articles: pdata.articles,
       totalSize: pdata.totalResults,
       loading: false,
     });
+    this.props.set(100);
   }
   async componentDidMount() {
     this.update();
@@ -84,20 +88,20 @@ export default class News extends Component {
     return (
       <>
         <>
-          <h1 class="text-center"> News Component</h1>
+          <h1 className="text-center"> News Component</h1>
           {/* {this.state.loading && <Spinner />} */}
           <InfiniteScroll
             dataLength={this.state.articles.length}
             next={this.fetchData}
             hasMore={!(this.state.articles.length > this.state.totalSize)}
             loader={<Spinner />}
-            // endMessage={
-            //   <p style={{ textAlign: "center" }}>
-            //     <b>Yay! You have seen it all</b>
-            //   </p>
-            // }
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
           >
-            <div className="container">
+            <div className="container my-3">
               <div className="container row">
                 {this.state.articles.map((ele) => {
                   return (
