@@ -7,6 +7,18 @@ import LoadingBar from "react-top-loading-bar";
 export default class App extends Component {
   state = {
     progress: 0,
+    mode: "light",
+  };
+  changeMode = () => {
+    if (this.state.mode == "light") {
+      this.setState({ mode: "dark" });
+      document.body.style.backgroundColor = "#212529";
+      document.body.style.color = "white";
+    } else {
+      this.setState({ mode: "light" });
+      document.body.style.backgroundColor = "white";
+      document.body.style.color = "black";
+    }
   };
   setProgress = (value) => {
     this.setState({ progress: value });
@@ -22,13 +34,14 @@ export default class App extends Component {
             height={4}
             progress={this.state.progress}
           />
-          <Navbar />
+          <Navbar mode={this.state.mode} set={this.changeMode} />
           <Routes>
             <Route
               exact
               path="/"
               element={
                 <News
+                  mode={this.state.mode}
                   set={this.setProgress}
                   key="general"
                   pageSize={this.pageSize}
@@ -42,6 +55,7 @@ export default class App extends Component {
               path="/business"
               element={
                 <News
+                  mode={this.state.mode}
                   set={this.setProgress}
                   key="business"
                   pageSize={this.pageSize}
@@ -55,6 +69,7 @@ export default class App extends Component {
               path="/tech"
               element={
                 <News
+                  mode={this.state.mode}
                   set={this.setProgress}
                   key="tech"
                   pageSize={this.pageSize}
@@ -68,6 +83,7 @@ export default class App extends Component {
               path="/health"
               element={
                 <News
+                  mode={this.state.mode}
                   set={this.setProgress}
                   key="health"
                   pageSize={this.pageSize}
@@ -81,6 +97,7 @@ export default class App extends Component {
               path="/science"
               element={
                 <News
+                  mode={this.state.mode}
                   set={this.setProgress}
                   key="science"
                   pageSize={this.pageSize}
@@ -94,6 +111,7 @@ export default class App extends Component {
               path="/sports"
               element={
                 <News
+                  mode={this.state.mode}
                   set={this.setProgress}
                   key="sports"
                   pageSize={this.pageSize}
@@ -107,6 +125,7 @@ export default class App extends Component {
               path="/entertainment"
               element={
                 <News
+                  mode={this.state.mode}
                   set={this.setProgress}
                   key="entertainment"
                   pageSize={this.pageSize}

@@ -36,6 +36,7 @@ export default class News extends Component {
   };
   async update() {
     this.props.set(10);
+    document.title = this.props.category + " News Monkey";
     this.setState({ loading: true });
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=1&pageSize=${this.props.pageSize}`;
     this.props.set(30);
@@ -88,7 +89,10 @@ export default class News extends Component {
     return (
       <>
         <>
-          <h1 className="text-center"> News Component</h1>
+          <h1 className="text-center">
+            {" "}
+            Latest News in {this.props.category}{" "}
+          </h1>
           {/* {this.state.loading && <Spinner />} */}
           <InfiniteScroll
             dataLength={this.state.articles.length}
@@ -107,6 +111,7 @@ export default class News extends Component {
                   return (
                     <div className="col-md-4">
                       <Newsitem
+                        mode={this.props.mode}
                         title={ele.title ? ele.title : " "}
                         desc={ele.description ? ele.description : " "}
                         imgUrl={

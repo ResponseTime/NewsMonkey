@@ -2,10 +2,15 @@ import React, { Component } from "react";
 
 export default class Newsitem extends Component {
   render() {
-    let { title, desc, imgUrl, newsUrl } = this.props;
+    let { title, desc, imgUrl, newsUrl, mode } = this.props;
     return (
       <>
-        <div className="card">
+        <div
+          className={`card bg-${mode} text-${
+            mode === "light" ? "dark" : "light"
+          }`}
+          style={{ height: "500px", width: "450px", border: "none" }}
+        >
           <div
             style={{
               display: "flex",
@@ -27,11 +32,15 @@ export default class Newsitem extends Component {
               {desc.length > 50 ? desc.substring(0, 50) + "..." : desc}
             </p>
             <p className="card-text">
-              <small className="text-muted">
+              <small className={`text-${mode === "light" ? "dark" : "light"}`}>
                 By {this.props.author} on {this.props.date}
               </small>
             </p>
-            <a href={newsUrl} target="_blank" className="btn btn-dark">
+            <a
+              href={newsUrl}
+              target="_blank"
+              className={`btn btn-${mode == "light" ? "dark" : "light"}`}
+            >
               Go somewhere
             </a>
           </div>
