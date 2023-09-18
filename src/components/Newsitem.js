@@ -9,7 +9,11 @@ export default class Newsitem extends Component {
           className={`card bg-${mode} text-${
             mode === "light" ? "dark" : "light"
           }`}
-          style={{ height: "500px", width: "450px", border: "none" }}
+          style={{
+            height: "550px",
+            width: "450px",
+            border: "none",
+          }}
         >
           <div
             style={{
@@ -23,7 +27,12 @@ export default class Newsitem extends Component {
               {this.props.source}
             </span>
           </div>
-          <img className="card-img-top" src={imgUrl} alt="Card image cap" />
+          <img
+            className="card-img-top"
+            src={imgUrl}
+            alt="Card image cap"
+            style={{ height: "300px", width: "300" }}
+          />
           <div className="card-body">
             <h5 className="card-title">
               {title.length > 10 ? title.substring(0, 10) + "..." : title}

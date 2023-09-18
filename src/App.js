@@ -5,6 +5,7 @@ import News from "./components/News";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 export default class App extends Component {
+  key = process.env.REACT_APP_API_KEY;
   state = {
     progress: 0,
     mode: "light",
@@ -26,6 +27,7 @@ export default class App extends Component {
   name = "app";
   pageSize = 6;
   render() {
+    console.log(this.key);
     return (
       <>
         <Router>
@@ -41,6 +43,7 @@ export default class App extends Component {
               path="/"
               element={
                 <News
+                  akey={this.key}
                   mode={this.state.mode}
                   set={this.setProgress}
                   key="general"
@@ -55,6 +58,7 @@ export default class App extends Component {
               path="/business"
               element={
                 <News
+                  akey={this.key}
                   mode={this.state.mode}
                   set={this.setProgress}
                   key="business"
@@ -69,6 +73,7 @@ export default class App extends Component {
               path="/tech"
               element={
                 <News
+                  akey={this.key}
                   mode={this.state.mode}
                   set={this.setProgress}
                   key="tech"
@@ -83,6 +88,7 @@ export default class App extends Component {
               path="/health"
               element={
                 <News
+                  akey={this.key}
                   mode={this.state.mode}
                   set={this.setProgress}
                   key="health"
@@ -97,6 +103,7 @@ export default class App extends Component {
               path="/science"
               element={
                 <News
+                  akey={this.key}
                   mode={this.state.mode}
                   set={this.setProgress}
                   key="science"
@@ -111,6 +118,7 @@ export default class App extends Component {
               path="/sports"
               element={
                 <News
+                  akey={this.key}
                   mode={this.state.mode}
                   set={this.setProgress}
                   key="sports"
@@ -125,6 +133,7 @@ export default class App extends Component {
               path="/entertainment"
               element={
                 <News
+                  akey={this.key}
                   mode={this.state.mode}
                   set={this.setProgress}
                   key="entertainment"

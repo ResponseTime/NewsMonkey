@@ -25,10 +25,14 @@ export default class News extends Component {
     };
   }
   fetchData = async () => {
-    this.setState({ page: this.state.page + 1 });
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      this.props.country
+    }&category=${this.props.category}&apiKey=${this.props.akey}&page=${
+      this.state.page + 1
+    }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let pdata = await data.json();
+    this.setState({ page: this.state.page + 1 });
     this.setState({
       articles: this.state.articles.concat(pdata.articles),
       totalSize: pdata.totalResults,
@@ -38,7 +42,7 @@ export default class News extends Component {
     this.props.set(10);
     document.title = this.props.category + " News Monkey";
     this.setState({ loading: true });
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=933f3a0442f64e9593f2680fd21b82e3&page=1&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.akey}&page=1&pageSize=${this.props.pageSize}`;
     this.props.set(30);
     let data = await fetch(url);
     let pdata = await data.json();
@@ -97,7 +101,7 @@ export default class News extends Component {
           <InfiniteScroll
             dataLength={this.state.articles.length}
             next={this.fetchData}
-            hasMore={!(this.state.articles.length > this.state.totalSize)}
+            hasMore={this.state.articles.length != this.state.totalSize}
             loader={<Spinner />}
             endMessage={
               <p style={{ textAlign: "center" }}>
@@ -106,7 +110,7 @@ export default class News extends Component {
             }
           >
             <div className="container my-3">
-              <div className="container row">
+              <div className="row" style={{ margin: "0px -40px" }}>
                 {this.state.articles.map((ele) => {
                   return (
                     <div className="col-md-4">
