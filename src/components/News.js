@@ -93,7 +93,7 @@ export default class News extends Component {
     return (
       <>
         <>
-          <h1 className="text-center">
+          <h1 className="text-center" style={{ marginTop: "60px" }}>
             {" "}
             Latest News in {this.props.category}{" "}
           </h1>
